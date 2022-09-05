@@ -20,6 +20,7 @@ import { CarouselModule } from 'primeng/carousel';
 
 import { MovieComponent } from './pages/movie/movie.component';
 import { VideoTemplateComponent } from './components/video-template/video-template.component';
+import { GenresComponent } from './pages/genres/genres.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { VideoTemplateComponent } from './components/video-template/video-templa
     ItemsBannerComponent,
     ItemComponent,
     MovieComponent,
-    VideoTemplateComponent
+    VideoTemplateComponent,
+    GenresComponent
   ],
   imports: [
     BrowserModule,
