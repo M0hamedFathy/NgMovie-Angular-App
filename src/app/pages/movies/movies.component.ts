@@ -13,6 +13,8 @@ import { MoviesService } from '../../services/movies.service';
 export class MoviesComponent implements OnInit {
   movies: Movie[] | Tv[] = [];
   genreId: string | null = null;
+  searchValue: string | null = null;
+
   constructor(private moviesService: MoviesService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
@@ -36,8 +38,8 @@ export class MoviesComponent implements OnInit {
       this.movies = movies;
     });
   }
-  getPagedMovies(page: number) {
-    this.moviesService.searchMovies(page).subscribe((movies) => {
+  getPagedMovies(page: number, searchKeyWord?: string) {
+    this.moviesService.searchMovies(page, searchKeyWord).subscribe((movies) => {
       this.movies = movies;
     });
   }
@@ -47,7 +49,16 @@ export class MoviesComponent implements OnInit {
     if (this.genreId) {
       this.getMoviesByGenre(this.genreId, pageNumber);
     } else {
-      this.getPagedMovies(pageNumber);
+      if (this.searchValue) {
+        this.getPagedMovies(pageNumber, this.searchValue);
+      } else {
+        this.getPagedMovies(pageNumber);
+      }
+    }
+  }
+  searchChanged() {
+    if (this.searchValue) {
+      this.getPagedMovies(1, this.searchValue);
     }
   }
 }
